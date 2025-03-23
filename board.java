@@ -6,11 +6,12 @@ public class board {
     private final int boardSize=9;
     private final int boardMax=64;
     private final char board[][]=new char[boardSize][boardSize];
-    private final char boardOrder;
+    private final int boardOrder;
     private final String boardModel;
+    private final char blank='·';
     
     //初始化棋盘
-    public board(char Order,String Model) {
+    public board(int Order,String Model) {
         boardOrder=Order;
         boardModel=Model;
         initializeBoard();
@@ -20,7 +21,7 @@ public class board {
 
     private void initializeBoard(){
         for(int i=0;i<boardSize;i++){
-            Arrays.fill(board[i],'·');
+            Arrays.fill(board[i],blank);
         }
     }
 
@@ -44,5 +45,7 @@ public class board {
     public char[][] getboard(){return board;}
     public int getSize(){return boardSize;}
     public int getMax(){return boardMax;}
-    public char getOrder(){return boardOrder;}
+    public int getOrder(){return boardOrder;}
+    public String getModel(){return boardModel;}
+    public char getblank(){return blank;}
 }

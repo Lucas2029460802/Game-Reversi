@@ -1,7 +1,7 @@
 package Reve;
 
 import java.awt.Point;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Rule {
 
@@ -54,38 +54,34 @@ public class Rule {
     //判断是否该点为空点
     public static boolean whetherBlank(board board,Point position){if(board.getboard()[position.x][position.y]!='·'){return false;}return true;}
 
-    //寻找棋盘上可以下的点位,通过控制indication来选择是否给出提示
-    public static boolean whetherToIndicate(board board,char piece,boolean indication){
-        int count=0;
-        if(indication){System.out.println("当前"+piece+"可下的位置是：");}
-        for(int i=leftborder;i<=rightborder;i++){
-            for(int j=leftborder;j<=rightborder;j++){
-                if(whetherBlank(board,new Point(i,j)) && whetherCanReversi(board,new Point(i,j),piece,false)){
-                    count++;
-                    if(indication){System.out.print(""+board.getboard()[i][0]+board.getboard()[0][j]+" ");}
+    //寻找棋盘上可以下的点位
+    public static ArrayList<Point> whetherToIndicate(board board,char piece){
+        ArrayList<Point> legalDots=new ArrayList<>();
+        if("reversi".equals(board.getModel())){
+            for(int i=leftborder;i<=rightborder;i++){
+                for(int j=leftborder;j<=rightborder;j++){
+                    if(whetherBlank(board,new Point(i,j)) && whetherCanReversi(board,new Point(i,j),piece,false)){
+                        legalDots.add(new Point(i,j));
+                    }
                 }
             }
         }
-        if(count!=0){return true;}
-        System.out.println("无");
-        return false;
+        return legalDots;
     }
 
-    public static boolean indication(char ans){if(ans=='Y')return true;return false;}
 
-
-    public static boolean rule(board board,Point position,char piece,Scanner scanner){
-        char ans;
-        if(whetherBlank(board,position)){
-            if(whetherCanReversi(board,position,piece,false)){
+    public static boolean rule(board board,Point position,char piece){
+        if(whetherBlank(board,position) && "reversi".equals(board.getModel())){
+            if(whetherCanReversi(board,position,piece,false) ){
                 whetherCanReversi(board,position,piece,true);
                 return true;
             }else{
-                System.out.println(piece+" 落点不符合规则，是否需要提示[Y/N]");
-                ans=scanner.next().charAt(0);
-                if(indication(ans)){whetherToIndicate(board,piece,true);}
+                System.out.println(piece+" 落点不符合规则");
                 System.out.println("请重新输入");
             }   
+        }
+        else if(whetherBlank(board,position) && "peace".equals(board.getModel())){
+            return true;
         }
         else{
             System.out.println("该落点已被占用，请重新输入");
