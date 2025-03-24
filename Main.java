@@ -67,7 +67,7 @@ public class Main {
                     if(position.y == peaceModel){
                         boards.add(new board(++GameNums,"peace"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+"[peace]");
+                        System.out.println(" New Game: Game"+GameNums+"[peace]\n");
                         whichBoard=GameNums-1;
                         Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
@@ -77,7 +77,7 @@ public class Main {
                     if(position.y == reversiModel){
                         boards.add(new board(++GameNums,"reversi"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+"[reversi]");
+                        System.out.println(" New Game: Game"+GameNums+"[reversi]\n");
                         whichBoard=GameNums-1;
                         Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
@@ -137,7 +137,7 @@ public class Main {
                     if(position.y == peaceModel){
                         boards.add(new board(++GameNums,"peace"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+" peace");
+                        System.out.println(" New Game: Game"+GameNums+" [peace]\n");
                         whichBoard=GameNums-1;
                         Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
@@ -147,7 +147,7 @@ public class Main {
                     if(position.y == reversiModel){
                         boards.add(new board(++GameNums,"reversi"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+" reversi");
+                        System.out.println(" New Game: Game"+GameNums+" [reversi]\n");
                         whichBoard=GameNums-1;
                         Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
