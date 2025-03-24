@@ -7,8 +7,9 @@ import java.util.ArrayList;
 public class Printf {
     public static void print(board board,ArrayList<board> boards,char piece){
         char indication='+';
+        int leftBorder=0,rightBorder=9;
         int maxLength=Math.max(player.PLAYER1.getName().length(),player.PLAYER2.getName().length());
-        String formaBlank=String.format("%-"+maxLength+"s",' ');
+        String formaBlank=String.format("%-"+maxLength+1+"s",' ');
         String formaName1=String.format("%-"+maxLength+"s",player.PLAYER1.getName());
         String formaName2=String.format("%-"+maxLength+"s",player.PLAYER2.getName());
         ArrayList<Point> legalDots=Rule.whetherToIndicate(board, piece);
@@ -16,8 +17,8 @@ public class Printf {
         for(Point dots:legalDots){
             board.getboard()[dots.x][dots.y]=indication;
         }
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++){
+        for(int i=leftBorder;i<rightBorder;i++){
+            for(int j=leftBorder;j<rightBorder;j++){
                 System.out.print("  "+board.getboard()[i][j]);
             }
             if(i==2){System.out.print(formaBlank+"Game List");}

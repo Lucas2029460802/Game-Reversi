@@ -45,23 +45,31 @@ public class Main {
 
                 // case1：轮到黑棋下
                 case 1:
-                    System.out.println("【" + player.PLAYER2.getName() + "】请输入" + player.PLAYER1.getPiece() + "/游戏编号1-"+GameNums+"/新游戏类型[peace/reversi]");
+                    System.out.println("【" + player.PLAYER2.getName() + "】请输入" + player.PLAYER1.getPiece() + "的坐标/游戏编号1-"+GameNums+"/新游戏类型[peace/reversi]");
                     position = Input.input(scanner);
 
                     // 切换棋盘
                     if (position.y == changeBoard) {
-                        System.out.println("Switch to Game " + (int)(position.x+1));
+                        int lastBoard=whichBoard;
                         whichBoard = position.x;
-                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
-                        break;
+                        try{
+                            Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
+                            System.out.println("Switch to Game " + (int)(whichBoard+1));
+                            break;
+                        }catch(Exception e){
+                            whichBoard=lastBoard;
+                            System.out.println("输入的棋盘编号不正确");
+                            break;
+                        }
                     }
 
                     //新游戏：peace模式
                     if(position.y == peaceModel){
                         boards.add(new board(++GameNums,"peace"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+" peace");
+                        System.out.println("New Game: Game"+GameNums+"[peace]");
                         whichBoard=GameNums-1;
+                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
                     }
 
@@ -69,14 +77,15 @@ public class Main {
                     if(position.y == reversiModel){
                         boards.add(new board(++GameNums,"reversi"));
                         eachBoardTurn.add(1);
-                        System.out.println("New Game: Game"+GameNums+" reversi");
+                        System.out.println("New Game: Game"+GameNums+"[reversi]");
                         whichBoard=GameNums-1;
+                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
                     }
 
                     // 用户选择输入黑棋坐标点
                     else {
-                        if (!Rule.whetherToIndicate(boards.get(whichBoard), player.PLAYER1.getPiece()).isEmpty() || "peace".equals(boards.get(whichBoard))) {
+                        if (!Rule.whetherToIndicate(boards.get(whichBoard), player.PLAYER1.getPiece()).isEmpty() || ("peace".equals(boards.get(whichBoard).getModel()))) {
 
                             // 判断下棋的位置是否符合规则
                             if (Rule.rule(boards.get(whichBoard), position, player.PLAYER1.getPiece())) {
@@ -106,15 +115,22 @@ public class Main {
 
                     // case2：轮到白棋下
                 case 2:
-                    System.out.println("【" + player.PLAYER2.getName() + "】请输入" + player.PLAYER2.getPiece() + "/游戏编号1-"+GameNums+"/新游戏类型:[peace/reversi]");
+                    System.out.println("【" + player.PLAYER2.getName() + "】请输入" + player.PLAYER2.getPiece() + "的坐标/游戏编号1-"+GameNums+"/新游戏类型:[peace/reversi]");
                     position = Input.input(scanner);
 
                     // 切换棋盘
                     if (position.y == changeBoard) {
-                        System.out.println("Switch to Game " + (int)(position.x+1));
+                        int lastBoard=whichBoard;
                         whichBoard = position.x;
-                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
-                        break;
+                        try{
+                            Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
+                            System.out.println("Switch to Game " + (int)(whichBoard+1));
+                            break;
+                        }catch(Exception e){
+                            whichBoard=lastBoard;
+                            System.out.println("输入的棋盘编号不正确");
+                            break;
+                        }
                     }
 
                     //新游戏：peace模式
@@ -123,6 +139,7 @@ public class Main {
                         eachBoardTurn.add(1);
                         System.out.println("New Game: Game"+GameNums+" peace");
                         whichBoard=GameNums-1;
+                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
                     }
 
@@ -132,12 +149,13 @@ public class Main {
                         eachBoardTurn.add(1);
                         System.out.println("New Game: Game"+GameNums+" reversi");
                         whichBoard=GameNums-1;
+                        Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                         break;
                     }
 
                     // 用户选择输入白棋坐标点
                     else {
-                        if (!Rule.whetherToIndicate(boards.get(whichBoard), player.PLAYER2.getPiece()).isEmpty() || "peace".equals(boards.get(whichBoard))) {
+                        if (!Rule.whetherToIndicate(boards.get(whichBoard), player.PLAYER2.getPiece()).isEmpty() || ("peace".equals(boards.get(whichBoard).getModel()))) {
 
                             // 判断下棋的位置是否符合规则
                             if (Rule.rule(boards.get(whichBoard), position, player.PLAYER2.getPiece())) {
