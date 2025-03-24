@@ -30,7 +30,7 @@ public class Input {
                             input(scanner);
                         }
 
-                    //切换模式
+                    //新游戏：切换模式
                     case 5:
                         if("peace".equals(input)){position.y=peaceModel;return position;}
                         else{System.out.println("请输入正确的模式");}

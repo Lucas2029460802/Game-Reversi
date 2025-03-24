@@ -13,9 +13,12 @@ public class Main {
         if(eachBoardTurn==1){return player.PLAYER1.getPiece();}
         return player.PLAYER2.getPiece();
     }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String name1, name2;
+
+        //具有特殊含义的数字
         int changeBoard=1111,peaceModel=2222,reversiModel=3333,GameNums=0;
 
         // position：坐标点，eachBoardTurn：轮到黑棋还是白棋下，whichBoard：当前游戏编号
@@ -24,7 +27,7 @@ public class Main {
         int whichBoard = 0;
         ArrayList<board> boards = new ArrayList<>();
 
-        // 初始化棋盘
+        // 初始化两个棋盘以及棋盘数量GameNums
         boards.add(new board(++GameNums,"peace"));
         boards.add(new board(++GameNums,"reversi"));
 
@@ -37,7 +40,6 @@ public class Main {
         Printf.print(boards.get(whichBoard),boards,player.PLAYER1.getPiece());
 
         
-
         // 判断棋盘是否被下满，结束游戏
         while (Count.count(boards.get(whichBoard).getboard(),
             boards.get(whichBoard).getSize())[2] != boards.get(whichBoard).getMax()) {
@@ -169,7 +171,7 @@ public class Main {
                                 Printf.print(boards.get(whichBoard),boards,pieceBlackOrWhite(eachBoardTurn.get(whichBoard)));
                                 break;
 
-                                // 不符合下棋规则，下一次下棋方白棋继续
+                            // 不符合下棋规则，下一次下棋方白棋继续
                             } else {
                                 eachBoardTurn.set(whichBoard, 2);
                                 break;

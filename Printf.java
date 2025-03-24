@@ -6,15 +6,21 @@ import java.util.ArrayList;
 
 public class Printf {
     public static void print(board board,ArrayList<board> boards,char piece){
+
+        //提示的字符
         char indication='+';
+
+        //棋盘的左边界与右边界
         int leftBorder=0,rightBorder=9;
         int BoardsSize=boards.size();
         int maxLength=Math.max(player.PLAYER1.getName().length(),player.PLAYER2.getName().length());
         
+        //格式化打印昵称
         String formaName1=String.format("%-"+maxLength+"s",player.PLAYER1.getName());
         String formaName2=String.format("%-"+maxLength+"s",player.PLAYER2.getName());
         ArrayList<Point> legalDots=Rule.whetherToIndicate(board, piece);
 
+        //在棋盘上修改提示
         for(Point dots:legalDots){
             board.getboard()[dots.x][dots.y]=indication;
         }
@@ -28,6 +34,7 @@ public class Printf {
             System.out.println();
         }
 
+        //打印当前开的所有游戏
         System.out.println();
         System.out.println(" [GameList]");
 
@@ -37,6 +44,7 @@ public class Printf {
 
         System.out.println();
         
+        //将提示改回空白字符，防止干扰下次提示
         for(Point dots:legalDots){
             board.getboard()[dots.x][dots.y]=board.getblank();
         }
